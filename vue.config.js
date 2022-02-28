@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/tab.link/'
+  publicPath: '/tab-link/'
 }
