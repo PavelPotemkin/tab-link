@@ -1,20 +1,21 @@
 <template>
-  <div class="block-view">
-    <transition-group name="list">
-      <div
-        v-for="(block) in blocks"
-        :key="block.type === 'image' ? block.value[0].name : block.value"
-        class="block-view__item"
-      >
-        <block-item
-          :block="block"
-          @delete="deleteBlock"
-          @change="changeBlock(block, $event)"
-          @move="moveBlock"
-        />
-      </div>
-    </transition-group>
-  </div>
+  <transition-group
+    class="block-view"
+    name="list"
+    tag="div">
+    <div
+      v-for="(block) in blocks"
+      :key="block.type === 'image' ? block.value[0].name : block.value"
+      class="block-view__item"
+    >
+      <block-item
+        :block="block"
+        @delete="deleteBlock"
+        @change="changeBlock(block, $event)"
+        @move="moveBlock"
+      />
+    </div>
+  </transition-group>
 </template>
 
 <script lang="ts">
