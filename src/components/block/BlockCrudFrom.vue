@@ -90,9 +90,9 @@ export default Vue.extend({
       ] as IBlockAddData,
       selectValue: {} as ISelectItem,
       exampleImagesUrl: [
-        '/example-images/cat-jump.png',
-        '/example-images/cat-lie.png',
-        '/example-images/placeholder-image.png'
+        process.env.BASE_URL + 'example-images/cat-jump.png',
+        process.env.BASE_URL + 'example-images/cat-lie.png',
+        process.env.BASE_URL + 'example-images/placeholder-image.png'
       ]
     }
   },
