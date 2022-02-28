@@ -1,4 +1,4 @@
-# tap.link
+# tab-link
 
 ## Project setup
 ```
