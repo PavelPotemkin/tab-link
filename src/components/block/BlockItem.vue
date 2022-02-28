@@ -83,7 +83,7 @@ export default Vue.extend({
 .block-item
   position relative
   width 100%
-  aspect-ratio 2
+  height 200px
   border 1px solid rgba(0, 0, 0, 20%)
   background-color white
   &_image img
