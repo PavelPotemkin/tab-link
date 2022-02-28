@@ -99,10 +99,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    emitInputFilesChange (files: FileList) {
+    emitInputFilesChange (files: FileList): void {
       this.$emit('input', files)
     },
-    setDataFiles (files: FileList | null) {
+    setDataFiles (files: FileList | null): void {
       if (!files) {
         return
       }
@@ -120,17 +120,17 @@ export default Vue.extend({
         this.emitInputFilesChange(newFiles.files)
       }
     },
-    uploadFile (e: Event) {
+    uploadFile (e: Event): void {
       if (e.target) {
         this.setDataFiles((e.target as HTMLInputElement).files)
       }
     },
-    dragFile (e: DragEvent) {
+    dragFile (e: DragEvent): void {
       if (e.dataTransfer) {
         this.setDataFiles(e.dataTransfer.files)
       }
     },
-    removeFile (index: number) {
+    removeFile (index: number): void {
       const files: File[] = Array.from(this.files || [])
       files.splice(index, 1)
 
@@ -147,13 +147,13 @@ export default Vue.extend({
 
       return newFiles.files
     },
-    onDragEnter () {
+    onDragEnter (): void {
       this.isFilesBoxDrag = true
     },
-    onDragLeave () {
+    onDragLeave (): void {
       this.isFilesBoxDrag = false
     },
-    async convertURLtoFile2 (img: IImageListItem) {
+    async convertURLtoFile2 (img: IImageListItem): Promise<File> {
       const { url, name } = img
       const response = await fetch(url)
       const data = await response.blob()
@@ -164,10 +164,10 @@ export default Vue.extend({
       const array = url.split('/')
       return array[array.length - 1]
     },
-    showExampleImages () {
+    showExampleImages (): void {
       this.exampleImagesDisplay = true
     },
-    async getExampleImage (img: IImageListItem) {
+    async getExampleImage (img: IImageListItem): Promise<void> {
       this.exampleImagesDisplay = false
       const file = await this.convertURLtoFile2(img)
 
@@ -176,7 +176,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    exampleImages () {
+    exampleImages (): IImageList {
       const images: IImageList = []
 
       if (this.imageUrlList) {
@@ -187,28 +187,22 @@ export default Vue.extend({
           })
         })
       }
-      // const images: File[] = []
-
-      // eslint-disable-next-line no-unused-expressions
-      // this.imageUrlList?.forEach(name => {
-      //   images.push(this.convertURLtoFile2(name))
-      // })
 
       return images
     },
-    dragAndDropText () {
+    dragAndDropText (): string {
       const text = 'Drag and drop files or click here'
 
       return Array.from(this.imageUrlList || []).length
         ? text + ' or select file from examples'
         : text
     },
-    filesBoxClassObject () {
+    filesBoxClassObject (): {[key: string]: boolean} {
       return {
         'app-file-field__box_drag': this.isFilesBoxDrag
       }
     },
-    files () {
+    files (): File[] {
       return Array.from(this.value)
     }
   }

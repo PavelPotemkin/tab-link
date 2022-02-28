@@ -43,7 +43,7 @@ import AppFileField from '@/ui/AppFileField.vue'
 import AppButton from '@/ui/AppButton.vue'
 import AppModal from '@/ui/AppModal.vue'
 import AppSelect, { ISelectItem } from '@/ui/AppSelect.vue'
-import { IBlock, IBlockAddData } from '@/types/block.type'
+import { IBlock, IBlockAdd, IBlockAddData } from '@/types/block.type'
 
 export default Vue.extend({
   name: 'BlockCrudFrom',
@@ -106,14 +106,17 @@ export default Vue.extend({
       }
 
       const currentBlock = this.blocksData.find(block => block.type === type)
-      currentBlock.value = value
+
+      if (currentBlock) {
+        currentBlock.value = value
+      }
     }
   },
   computed: {
-    currentBlock () {
+    currentBlock (): IBlockAdd | undefined {
       return this.blocksData.find(block => block.type === this.selectValue.value)
     },
-    isBlockEmpty () {
+    isBlockEmpty (): boolean {
       return !this.currentBlock || this.currentBlock.isBlockEmpty()
     },
     selectValues (): ISelectItem[] {
@@ -126,24 +129,26 @@ export default Vue.extend({
     }
   },
   methods: {
-    setBlockValuesToDefault () {
+    setBlockValuesToDefault (): void {
       for (const key in this.blocksData) {
         const block = this.blocksData[key]
         block.value = block.defaultValue
       }
     },
-    saveBlockData (event?: Event) {
+    saveBlockData (event?: Event): void {
       event && event.preventDefault()
 
-      this.$emit('change', {
-        name: this.currentBlock.name,
-        type: this.currentBlock.type,
-        value: this.currentBlock.value
-      })
+      if (this.currentBlock) {
+        this.$emit('change', {
+          name: this.currentBlock.name,
+          type: this.currentBlock.type,
+          value: this.currentBlock.value
+        })
+      }
     }
   },
   watch: {
-    selectValue () {
+    selectValue (): void {
       if (this.clearValueOnSelectChange) {
         this.setBlockValuesToDefault()
       }

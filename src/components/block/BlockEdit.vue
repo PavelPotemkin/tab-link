@@ -55,10 +55,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    modalDisplayChange (value) {
+    modalDisplayChange (value: boolean): void {
       this.$emit('input', value)
     },
-    saveBlockData (block: IBlock) {
+    saveBlockData (block: IBlock): void {
       this.$emit('input', false)
       this.$emit('editBlock', block)
     }
