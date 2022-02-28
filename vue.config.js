@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/tab-link/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/tab-link/' : '/'
 }
