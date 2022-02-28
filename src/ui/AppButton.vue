@@ -51,6 +51,7 @@ export default Vue.extend({
   outline 0
   background-color white;
   color var(--text-color)
+  cursor pointer
   &:focus
     border-color var(--focus-color)
   &:active
