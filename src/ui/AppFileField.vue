@@ -153,7 +153,7 @@ export default Vue.extend({
     onDragLeave (): void {
       this.isFilesBoxDrag = false
     },
-    async convertURLtoFile2 (img: IImageListItem): Promise<File> {
+    async convertURLtoFile (img: IImageListItem): Promise<File> {
       const { url, name } = img
       const response = await fetch(url)
       const data = await response.blob()
@@ -169,7 +169,7 @@ export default Vue.extend({
     },
     async getExampleImage (img: IImageListItem): Promise<void> {
       this.exampleImagesDisplay = false
-      const file = await this.convertURLtoFile2(img)
+      const file = await this.convertURLtoFile(img)
 
       const files = this.getFileListFromArray([file])
       this.setDataFiles(files)
